@@ -9,7 +9,7 @@
   <section class="boxed-section" ng-repeat="rule in vm.rules track by rule.id" >
     <div class="header">
       <span class="large" ng-bind="rule.name"></span>
-      <div style="float: right">
+      <div class="right">
         <a ng-click="vm.viewRule(rule)"><i class="fa fa-pencil"></i></a>
         &nbsp;&nbsp;&nbsp;
         <a ng-click="vm.deleteRule(rule)"><i class="fa fa-trash"></i></a>

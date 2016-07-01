@@ -87,7 +87,10 @@ var directive = ['AutoModeration', 'Alert',
       this.getRules = function() {
         return AutoModeration.rules().$promise
         .then(function(data) { ctrl.rules = data; })
-        .catch(function(err) { Alert.error(err.data.message); });
+        .catch(function(err) {
+          if (err.status === 403) { return; }
+          else { Alert.error(err.data.message); }
+        });
       };
 
       this.saveRule = function(rule) {
