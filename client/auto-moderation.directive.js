@@ -1,5 +1,5 @@
-var directive = ['AutoModeration', 'Alert',
-  function(AutoModeration, Alert) {
+var directive = ['AutoModeration', 'Alert', 'Session',
+  function(AutoModeration, Alert, Session) {
   return {
     restrict: 'E',
     scope: true,
@@ -10,6 +10,34 @@ var directive = ['AutoModeration', 'Alert',
       var ctrl = this;
       ctrl.rules = [];
       this.viewedRule = {name:'', conditions:[], actions: [], options: {edit: {}}};
+
+      this.canViewRules = function() {
+        var authed = Session.isAuthenticated();
+        var permed = Session.hasPermission('autoModeration.rules.allow');
+        if (authed && permed) { return true; }
+        else { return false; }
+      };
+
+      this.canCreateRule = function() {
+        var authed = Session.isAuthenticated();
+        var permed = Session.hasPermission('autoModeration.addRule.allow');
+        if (authed && permed) { return true; }
+        else { return false; }
+      };
+
+      this.canEditRule = function() {
+        var authed = Session.isAuthenticated();
+        var permed = Session.hasPermission('autoModeration.editRule.allow');
+        if (authed && permed) { return true; }
+        else { return false; }
+      };
+
+      this.canRemoveRule = function() {
+        var authed = Session.isAuthenticated();
+        var permed = Session.hasPermission('autoModeration.removeRule.allow');
+        if (authed && permed) { return true; }
+        else { return false; }
+      };
 
       this.createRule = function() {
         ctrl.viewedRule = {name:'', conditions:[], actions: [], options: {edit: {}}};

@@ -1,6 +1,6 @@
 {
   "name": "ept-auto-moderation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Auto Moderation Module",
   "main": "index.js",
   "scripts": {

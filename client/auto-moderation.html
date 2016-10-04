@@ -1,25 +1,31 @@
-<h5 class="thin-underline section-header-top-spacing">
-  Auto Moderation Rules
-  <a ng-click="vm.createRule()" class="right">
-    <i class="fa fa-plus"></i>&nbsp;&nbsp;Add Rule
-  </a>
-</h5>
+<div ng-if="vm.canViewRules()">
+  <h5 class="thin-underline section-header-top-spacing">
+    Auto Moderation Rules
+    <a ng-click="vm.createRule()" class="right" ng-if="vm.canCreateRule()">
+      <i class="fa fa-plus"></i>&nbsp;&nbsp;Add Rule
+    </a>
+  </h5>
 
-<div class="rules-data">
-  <section class="boxed-section" ng-repeat="rule in vm.rules track by rule.id" >
-    <div class="header">
-      <span class="large" ng-bind="rule.name"></span>
-      <div class="right">
-        <a ng-click="vm.viewRule(rule)"><i class="fa fa-pencil"></i></a>
-        &nbsp;&nbsp;&nbsp;
-        <a ng-click="vm.deleteRule(rule)"><i class="fa fa-trash"></i></a>
+  <div class="rules-data">
+    <section class="boxed-section" ng-repeat="rule in vm.rules track by rule.id" >
+      <div class="header">
+        <span class="large" ng-bind="rule.name"></span>
+        <div class="right">
+          <a ng-click="vm.viewRule(rule)" ng-if="vm.canEditRule()">
+            <i class="fa fa-pencil"></i>
+          </a>
+          &nbsp;&nbsp;&nbsp;
+          <a ng-click="vm.deleteRule(rule)" ng-if="vm.canRemoveRule()">
+            <i class="fa fa-trash"></i>
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="content">
-      <div class="desc-label rule-description" ng-bind="rule.description"></div>
-      <div class="desc-label rule-description" ng-if="!rule.description">No Description Given</div>
-    </div>
-  </section>
+      <div class="content">
+        <div class="desc-label rule-description" ng-bind="rule.description"></div>
+        <div class="desc-label rule-description" ng-if="!rule.description">No Description Given</div>
+      </div>
+    </section>
+  </div>
 </div>
 
 <!-- Edit Rule Modal -->
